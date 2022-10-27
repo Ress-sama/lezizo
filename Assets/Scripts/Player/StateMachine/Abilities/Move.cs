@@ -18,7 +18,7 @@ namespace Riyezu.Player.StateMachine.Abilities
         {
             float velocityX =
                 Mathf.MoveTowards(player.rigidbody2D.velocity.x, moveSpeed * player.PlayerInputs.Move,
-                    20 * Time.deltaTime);
+                    100 * Time.deltaTime);
             player.rigidbody2D.velocity = new Vector2(velocityX, player.rigidbody2D.velocity.y);
         }
 

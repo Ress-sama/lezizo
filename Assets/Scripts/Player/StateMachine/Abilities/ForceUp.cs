@@ -7,18 +7,19 @@ namespace Riyezu.Player.StateMachine.Abilities
     public class ForceUp : Ability
     {
         [SerializeField] [Range(0, 1)] private float timing;
-        [SerializeField] [Range(0, 500)] private float upForce;
+        [SerializeField] [Range(0, 2000)] private float upForce;
         private Player player;
         private bool jump;
 
         public override void StateStart(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            jump = false;
             player = animator.GetPlayer();
         }
 
         public override void StateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (stateInfo.normalizedTime >= timing && !jump)
+            if (stateInfo.normalizedTime >= timing && jump == false)
             {
                 player.rigidbody2D.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
                 jump = true;

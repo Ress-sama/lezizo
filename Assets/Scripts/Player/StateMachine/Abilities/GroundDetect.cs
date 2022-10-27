@@ -9,7 +9,7 @@ namespace Riyezu.Player.StateMachine.Abilities
         private CapsuleCollider2D capsuleCollider;
 
         [SerializeField] private LayerMask layerMask;
-        [SerializeField] [Range(0, 1)] private float detectDistance;
+        [SerializeField] [Range(0, 5)] private float detectDistance;
 
         public override void StateStart(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
