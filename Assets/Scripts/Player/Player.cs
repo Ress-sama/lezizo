@@ -6,7 +6,7 @@ namespace Riyezu.Player
     public class Player : MonoBehaviour
     {
         private InputSystem inputSystem;
-        public PlayerInputs PlayerInputs { get; set; }
+        public InputManager InputManager { get; set; }
         private AnimatorController animatorController;
         public ColliderController ColliderController { get; set; }
         public Rigidbody2D rigidbody2D { get; private set; }
@@ -14,7 +14,7 @@ namespace Riyezu.Player
         private void Awake()
         {
             inputSystem = new InputSystem();
-            PlayerInputs = new PlayerInputs();
+            InputManager = new InputManager();
             animatorController = new AnimatorController(GetComponentInChildren<Animator>());
             ColliderController = new ColliderController(GetComponent<CapsuleCollider2D>());
             inputSystem.Player.Enable();
@@ -22,6 +22,8 @@ namespace Riyezu.Player
             inputSystem.Player.Jump.started += _ => animatorController.SetJump(true);
             inputSystem.Player.Movement.started += _ => animatorController.SetMove(true);
             inputSystem.Player.Movement.canceled += _ => animatorController.SetMove(false);
+            inputSystem.Player.Crouch.started += _ => animatorController.SetCrouch(true);
+            inputSystem.Player.Crouch.canceled += _ => animatorController.SetCrouch(false);
             rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
@@ -29,7 +31,7 @@ namespace Riyezu.Player
         {
             ColliderController.UpdateColliderSize();
             ColliderController.UpdateColliderOffset();
-            PlayerInputs.Move = inputSystem.Player.Movement.ReadValue<float>();
+            InputManager.Move = inputSystem.Player.Movement.ReadValue<float>();
         }
     }
 }

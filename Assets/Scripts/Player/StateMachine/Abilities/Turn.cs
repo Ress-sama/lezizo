@@ -15,12 +15,12 @@ namespace Riyezu.Player.StateMachine.Abilities
 
         public override void StateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (player.PlayerInputs.Move>0)
+            if (player.InputManager.Move>0)
             {
                 player.rigidbody2D.transform.rotation =
                     Quaternion.Euler(0, 0, 0);
             }
-            else if (player.PlayerInputs.Move<0)
+            else if (player.InputManager.Move<0)
             {
                 player.rigidbody2D.transform.rotation =
                     Quaternion.Euler(0, 180, 0);

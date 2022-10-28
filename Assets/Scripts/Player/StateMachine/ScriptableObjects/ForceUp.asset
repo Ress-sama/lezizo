@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ForceUp
   m_EditorClassIdentifier: 
   timing: 0.372
-  upForce: 659
+  upForce: 1191

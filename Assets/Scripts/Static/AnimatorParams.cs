@@ -5,6 +5,8 @@ namespace Riyezu.Static
         Ground,
         Move,
         Jump,
-        ForceTransition
+        Crouch,
+        ForceTransition,
+        HeadCollision
     }
 }

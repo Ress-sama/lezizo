@@ -17,7 +17,7 @@ namespace Riyezu.Player.StateMachine.Abilities
         public override void StateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             float velocityX =
-                Mathf.MoveTowards(player.rigidbody2D.velocity.x, moveSpeed * player.PlayerInputs.Move,
+                Mathf.MoveTowards(player.rigidbody2D.velocity.x, moveSpeed * player.InputManager.Move,
                     100 * Time.deltaTime);
             player.rigidbody2D.velocity = new Vector2(velocityX, player.rigidbody2D.velocity.y);
         }

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aa71e235ea43d4d7b0fbf3e7dd6754a, type: 3}
-  m_Name: LoopJumpIdle_GroundDetect
+  m_Script: {fileID: 11500000, guid: 862873edbfaa5408b834ba1397f18211, type: 3}
+  m_Name: CoruchMove_UpdateCollider
   m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  detectDistance: 0.69
+  targetSize: {x: 1.51, y: 3.602848}
+  sizeUpdateSpeed: 20
+  targetOffset: {x: 0, y: 0.7894332}
+  offSetUpdateSpeed: 20
