@@ -22,8 +22,7 @@ namespace Riyezu.Player.StateMachine
             if (UpdateCollider == false) return;
             if (Vector2.SqrMagnitude(collider.size - TargetSize) > 0.01)
             {
-                collider.size = new Vector2(collider.size.x,
-                    Mathf.Lerp(collider.size.y, TargetSize.y, Time.deltaTime * SizeUpdateSpeed));
+                collider.size = Vector2.Lerp(collider.size, TargetSize, Time.deltaTime * SizeUpdateSpeed);
             }
         }
 

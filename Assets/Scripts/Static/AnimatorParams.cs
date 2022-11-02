@@ -7,6 +7,9 @@ namespace Riyezu.Static
         Jump,
         Crouch,
         ForceTransition,
-        HeadCollision
+        HeadCollision,
+        Sprint,
+        Velocity,
+        PickUp
     }
 }

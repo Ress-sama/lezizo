@@ -26,5 +26,15 @@ namespace Riyezu.Player
         {
             animator.SetBool(AnimatorParams.Crouch.ToString(), value);
         }
+
+        public void SetSprint(bool value)
+        {
+            animator.SetBool(AnimatorParams.Sprint.ToString(), value);
+        }
+        
+        public void SetPickUp(bool value)
+        {
+            animator.SetBool(AnimatorParams.PickUp.ToString(), value);
+        }
     }
 }

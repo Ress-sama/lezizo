@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Walk_Move
   m_EditorClassIdentifier: 
   moveSpeed: 5.38
+  smooth: 100

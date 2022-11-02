@@ -8,6 +8,7 @@ namespace Riyezu.Player.StateMachine.Abilities
     {
         [SerializeField] [Range(0, 1)] private float timing;
         [SerializeField] [Range(0, 2000)] private float upForce;
+        [SerializeField] private Vector2 angle;
         private Player player;
         private bool jump;
 
@@ -21,7 +22,8 @@ namespace Riyezu.Player.StateMachine.Abilities
         {
             if (stateInfo.normalizedTime >= timing && jump == false)
             {
-                player.rigidbody2D.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
+                player.rigidbody2D.AddForce(new Vector2(angle.x * player.InputManager.Move, angle.y) * upForce,
+                    ForceMode2D.Impulse);
                 jump = true;
             }
         }

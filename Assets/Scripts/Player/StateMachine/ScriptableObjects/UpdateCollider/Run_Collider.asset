@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e415b27c64bcd4185a8eae1b97a043b2, type: 3}
-  m_Name: Crouch_Move
+  m_Script: {fileID: 11500000, guid: 862873edbfaa5408b834ba1397f18211, type: 3}
+  m_Name: Run_Collider
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  smooth: 100
+  targetSize: {x: 4, y: 4.84}
+  sizeUpdateSpeed: 27.94
+  targetOffset: {x: 0, y: 1.43}
+  offSetUpdateSpeed: 29.7
+  timing: 0
+  start: 0
