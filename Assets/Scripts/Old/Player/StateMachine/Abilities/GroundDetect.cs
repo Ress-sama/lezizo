@@ -53,7 +53,6 @@ namespace Riyezu.Player.StateMachine.Abilities
                     collider2D = raycastHit.collider;
                 }
             }
-
             return collider2D != null;
         }
     }

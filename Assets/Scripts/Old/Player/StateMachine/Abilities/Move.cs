@@ -21,12 +21,18 @@ namespace Riyezu.Player.StateMachine.Abilities
             float velocityX =
                 Mathf.MoveTowards(player.rigidbody2D.velocity.x, moveSpeed * player.InputManager.Move,
                     smooth * Time.deltaTime);
-            animator.SetFloat(AnimatorParams.Velocity.ToString(), Mathf.Abs(velocityX / moveSpeed+0.1f));
+            animator.SetFloat(AnimatorParams.Velocity.ToString(), Mathf.Abs(velocityX / moveSpeed + 0.1f));
             player.rigidbody2D.velocity = new Vector2(velocityX, player.rigidbody2D.velocity.y);
         }
 
         public override void StateEnd(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+        }
+
+
+        private void Turn()
+        {
+            
         }
     }
 }

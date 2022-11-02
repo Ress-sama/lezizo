@@ -1,7 +1,8 @@
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace PlayEatRepeat.Player
 {
     public class InputProvider : MonoBehaviour
     {
@@ -10,7 +11,7 @@ namespace Assets.Scripts
         private void Awake()
         {
             inputSystem = new InputSystem();
-            inputSystem.Player.Enable();
+            ;
         }
     }
 }

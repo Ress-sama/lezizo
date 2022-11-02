@@ -5,9 +5,9 @@ namespace Assets.Scripts.Utility
 {
     public static class AnimatorExtensions
     {
-        public static Player GetPlayer(this Animator animator)
+        public static Riyezu.Player.Player GetPlayer(this Animator animator)
         {
-            return animator.GetComponentInParent<Player>();
+            return animator.GetComponentInParent<Riyezu.Player.Player>();
         }
     }
 }
