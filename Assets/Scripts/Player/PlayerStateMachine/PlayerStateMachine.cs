@@ -14,7 +14,6 @@ namespace PlayEatRepeat.Player
 
         public void ChangeState(PlayerState playerState)
         {
-            Debug.Log("State changes: " + playerState.GetType());
             CurrentState.Exit();
             CurrentState = playerState;
             CurrentState.Enter();

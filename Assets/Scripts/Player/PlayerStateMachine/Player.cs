@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using Assets.Scripts.Player.Detectors;
 using PlayEatRepeat.Player.Data;
 using PlayEatRepeat.Player.PlayerStates.SubStates;
 using UnityEngine;
@@ -8,21 +8,42 @@ namespace PlayEatRepeat.Player
     public class Player : MonoBehaviour
     {
         public PlayerStateMachine StateMachine { get; private set; }
+        public InputSystem InputSystem { get; private set; }
+
+        #region SerializeFields
+
+        [SerializeField] private LayerMask groundLayer;
+        [SerializeField] [Range(0, 1)] private float groundDetectDistance;
+        [SerializeField] private PlayerData playerData;
+
+        #endregion
+
+        #region Components
+
         public Animator Animator { get; private set; }
         public Rigidbody2D Rigidbody2D { get; private set; }
         public CapsuleCollider2D CapsuleCollider { get; private set; }
-        public InputSystem InputSystem { get; private set; }
 
-        //States
+        #endregion
+
+        #region States
+
         public PlayerIdleState IdleState { get; private set; }
         public PlayerWalkState WalkState { get; private set; }
-        public PlayerJumpState JumpState { get; private set; }
+        public PlayerIdleJumpState IdleJumpState { get; private set; }
         public PlayerInAirState InAirState { get; private set; }
-        public PlayerLandState LandState { get; private set; }
+        public PlayerIdleLandState IdleLandState { get; private set; }
+        public PlayerWalkJumpState WalkJumpState { get; private set; }
 
+        #endregion
 
-        [SerializeField] private PlayerData playerData;
+        #region Utilities
 
+        public GroundDetector GroundDetector { get; private set; }
+        public DistanceCalculator DistanceCalculator { get; private set; }
+        public ColliderUpdater ColliderUpdater { get; private set; }
+
+        #endregion
 
         private void Awake()
         {
@@ -32,11 +53,16 @@ namespace PlayEatRepeat.Player
             Animator = GetComponentInChildren<Animator>();
             Rigidbody2D = GetComponent<Rigidbody2D>();
             CapsuleCollider = GetComponent<CapsuleCollider2D>();
+            GroundDetector = new GroundDetector(CapsuleCollider);
+            GroundDetector.LayerMask = groundLayer;
+            ColliderUpdater = new ColliderUpdater(CapsuleCollider);
+            DistanceCalculator = new DistanceCalculator(CapsuleCollider);
             IdleState = new PlayerIdleState(this, StateMachine, playerData, "Idle");
             WalkState = new PlayerWalkState(this, StateMachine, playerData, "Walk");
-            JumpState = new PlayerJumpState(this, StateMachine, playerData, "Walk");
-            InAirState = new PlayerInAirState(this, StateMachine, playerData, "Walk");
-            LandState = new PlayerLandState(this, StateMachine, playerData, "Walk");
+            IdleJumpState = new PlayerIdleJumpState(this, StateMachine, playerData, "IdleJump");
+            InAirState = new PlayerInAirState(this, StateMachine, playerData, "InAir");
+            IdleLandState = new PlayerIdleLandState(this, StateMachine, playerData, "Land");
+            WalkJumpState = new PlayerWalkJumpState(this, StateMachine, playerData, "IdleJump");
         }
 
         private void Start()
@@ -47,6 +73,8 @@ namespace PlayEatRepeat.Player
         public void Update()
         {
             StateMachine.CurrentState.LogicUpdate();
+            ColliderUpdater.UpdateColliderSize();
+            ColliderUpdater.UpdateColliderOffset();
         }
 
         public void FixedUpdate()
@@ -54,30 +82,18 @@ namespace PlayEatRepeat.Player
             StateMachine.CurrentState.PhysicsUpdate();
         }
 
-        public void CheckGround()
+        public void SetVelocityX(float moveForce, float direction, float smooth)
         {
-            List<Vector3> rayStartVectors = new List<Vector3>()
-            {
-                new Vector3(CapsuleCollider.bounds.min.x, CapsuleCollider.bounds.min.y),
-                new Vector3(CapsuleCollider.bounds.center.x, CapsuleCollider.bounds.min.y),
-                new Vector3(CapsuleCollider.bounds.max.x, CapsuleCollider.bounds.min.y),
-            };
+            float velocityX =
+                Mathf.MoveTowards(Rigidbody2D.velocity.x, moveForce * direction,
+                    smooth * Time.deltaTime);
+            Rigidbody2D.velocity = new Vector2(velocityX, Rigidbody2D.velocity.y);
+        }
 
-            Collider2D collider2D = null;
-            foreach (var rayStartVector in rayStartVectors)
-            {
-                /*
-                RaycastHit2D raycastHit = Physics2D.Raycast(rayStartVector, Vector2.down,
-                    detectDistance, layerMask);
-                Debug.DrawRay(rayStartVector, Vector2.down * detectDistance, Color.red);
-                if (raycastHit.collider != null)
-                {
-                    collider2D = raycastHit.collider;
-                }
-            */
-            }
-
-            //return collider2D != null;
+        public void AddForce(Vector2 direction, float jumpForce)
+        {
+            Rigidbody2D.AddForce(direction * jumpForce,
+                ForceMode2D.Impulse);
         }
     }
 }

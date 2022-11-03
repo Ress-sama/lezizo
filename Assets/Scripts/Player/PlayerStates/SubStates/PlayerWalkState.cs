@@ -16,16 +16,18 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
             base.LogicUpdate();
             if (xAxisInput == 0)
             {
-                player.StateMachine.ChangeState(player.IdleState);
+                playerStateMachine.ChangeState(player.IdleState);
+            }
+
+            if (JumpInput)
+            {
+                playerStateMachine.ChangeState(player.WalkJumpState);
             }
         }
 
         public override void PhysicsUpdate()
         {
-            float velocityX =
-                Mathf.MoveTowards(player.Rigidbody2D.velocity.x, playerData.MoveSpeed * xAxisInput,
-                    80 * Time.deltaTime);
-            player.Rigidbody2D.velocity = new Vector2(velocityX, player.Rigidbody2D.velocity.y);
+            player.SetVelocityX(playerData.MoveSpeed, xAxisInput, 80);
         }
     }
 }

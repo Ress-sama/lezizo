@@ -9,6 +9,8 @@ namespace PlayEatRepeat.Player.PlayerStates.SuperState
         protected float xAxisInput;
         protected bool JumpInput;
 
+        protected bool IsGrounded;
+
         public PlayerGroundedState(Player player, PlayerStateMachine playerStateMachine, PlayerData playerData,
             string animationBoolName) : base(player, playerStateMachine, playerData, animationBoolName)
         {
@@ -20,6 +22,12 @@ namespace PlayEatRepeat.Player.PlayerStates.SuperState
             player.InputSystem.Player.Jump.started += _ => JumpInput = true;
             player.InputSystem.Player.Jump.canceled += _ => JumpInput = false;
             Turn();
+        }
+
+        public override void DoChecks()
+        {
+            base.DoChecks();
+            IsGrounded = player.GroundDetector.CheckGround();
         }
 
         private void Turn()

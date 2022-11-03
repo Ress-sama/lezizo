@@ -932,5 +932,17 @@ PrefabInstance:
       propertyPath: playerData
       value: 
       objectReference: {fileID: 11400000, guid: de7ea8fb0067b3eb6877dc61c1865c6e, type: 2}
+    - target: {fileID: 8620904837342294761, guid: 8193d75ea607aef79b6cb550c66b2d92, type: 3}
+      propertyPath: ground.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620904837342294761, guid: 8193d75ea607aef79b6cb550c66b2d92, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620904837342294761, guid: 8193d75ea607aef79b6cb550c66b2d92, type: 3}
+      propertyPath: groundDetectDistance
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8193d75ea607aef79b6cb550c66b2d92, type: 3}

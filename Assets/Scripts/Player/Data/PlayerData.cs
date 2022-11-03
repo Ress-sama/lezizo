@@ -6,5 +6,6 @@ namespace PlayEatRepeat.Player.Data
     public class PlayerData : ScriptableObject
     {
         public float MoveSpeed;
+        public float JumpForce;
     }
 }
