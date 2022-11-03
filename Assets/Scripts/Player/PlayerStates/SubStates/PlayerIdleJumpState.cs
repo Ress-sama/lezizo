@@ -24,7 +24,7 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
 
             isJump = false;
             colliderUpdated = false;
-            addForceTime = 0.18f;
+            addForceTime = 0.15f;
             abilityDoneTime = 0.4f;
             colliderUpdateTime = 0.22f;
         }
@@ -42,7 +42,9 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
         {
             if (time > addForceTime && !isJump)
             {
-                player.AddForce(Vector2.up, playerData.JumpForce);
+                player.SetVelocityY(playerData.JumpForce);
+                player.ColliderUpdater.SetParameters(new Vector2(1.51f, 3.7f), new Vector2(0f, 1.43f), 15);
+                player.ColliderUpdater.UpdateCollider = true;
                 isJump = true;
             }
         }
@@ -60,7 +62,7 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
             if (time > colliderUpdateTime && !colliderUpdated)
             {
                 colliderUpdated = true;
-                player.ColliderUpdater.SetParameters(new Vector2(1.72f, 5.14f), new Vector2(0.26f, 3.14f), 15);
+                //player.ColliderUpdater.SetParameters(new Vector2(1.72f, 5.14f), new Vector2(0.26f, 3.14f), 15);
                 player.ColliderUpdater.UpdateCollider = true;
             }
         }

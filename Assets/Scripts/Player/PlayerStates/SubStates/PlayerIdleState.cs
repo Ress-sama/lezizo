@@ -21,14 +21,14 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
         public override void Enter()
         {
             base.Enter();
-            player.ColliderUpdater.SetParameters(new Vector2(1.51f, 5.14f), new Vector2(0, 1.43f), 15);
+           // player.ColliderUpdater.SetParameters(new Vector2(1.51f, 5.14f), new Vector2(0, 1.43f), 15);
             player.ColliderUpdater.UpdateCollider = true;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if (xAxisInput != 0)
+            if (xInput != 0)
             {
                 playerStateMachine.ChangeState(player.WalkState);
             }

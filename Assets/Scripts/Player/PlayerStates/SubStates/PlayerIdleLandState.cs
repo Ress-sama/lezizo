@@ -22,7 +22,7 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
         public override void Enter()
         {
             base.Enter();
-            player.ColliderUpdater.SetParameters(new Vector2(1.61f, 5.14f), new Vector2(0.2f, 4.05f), 15);
+            player.ColliderUpdater.SetParameters(new Vector2(1.51f, 5.14f), new Vector2(0f, 1.43f), 15);
         }
 
         public override void LogicUpdate()
@@ -34,7 +34,7 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
                 return;
             }
 
-            if (xAxisInput != 0)
+            if (xInput != 0)
             {
                 playerStateMachine.ChangeState(player.WalkState);
             }

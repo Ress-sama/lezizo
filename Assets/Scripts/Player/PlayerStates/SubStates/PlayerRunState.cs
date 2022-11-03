@@ -1,14 +1,19 @@
 using PlayEatRepeat.Player.Data;
 using PlayEatRepeat.Player.PlayerStates.SuperState;
-using UnityEngine;
 
 namespace PlayEatRepeat.Player.PlayerStates.SubStates
 {
-    public class PlayerWalkState : PlayerGroundedState
+    public class PlayerRunState : PlayerGroundedState
     {
-        public PlayerWalkState(Player player, PlayerStateMachine playerStateMachine, PlayerData playerData,
+        public PlayerRunState(Player player, PlayerStateMachine playerStateMachine, PlayerData playerData,
             string animationBoolName) : base(player, playerStateMachine, playerData, animationBoolName)
         {
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+            SprintInput = true;
         }
 
         public override void LogicUpdate()
@@ -18,22 +23,20 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
             {
                 playerStateMachine.ChangeState(player.IdleState);
             }
-
-            if (JumpInput)
+            else if (!SprintInput && xInput != 0)
+            {
+                playerStateMachine.ChangeState(player.WalkState);
+            }
+            else if (JumpInput)
             {
                 playerStateMachine.ChangeState(player.WalkJumpState);
-            }
-
-            if (SprintInput)
-            {
-                playerStateMachine.ChangeState(player.RunState);
             }
         }
 
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-            player.SetVelocityX(playerData.MoveSpeed, xInput, 80);
+            player.SetVelocityX(playerData.MoveSpeed + playerData.MoveSpeed * 1.5f, xInput, 80);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Assets.Scripts.Player.Detectors
             RaycastHit2D raycastHit = Physics2D.Raycast(raycastVector, direction,
                 maxRayDistance, layer);
             Debug.DrawRay(raycastVector, direction * maxRayDistance, Color.green);
+            if (raycastHit.collider == null) return maxRayDistance;
             return raycastHit.distance;
         }
     }

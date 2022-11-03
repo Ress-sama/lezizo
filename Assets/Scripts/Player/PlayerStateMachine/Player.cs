@@ -34,6 +34,7 @@ namespace PlayEatRepeat.Player
         public PlayerInAirState InAirState { get; private set; }
         public PlayerIdleLandState IdleLandState { get; private set; }
         public PlayerWalkJumpState WalkJumpState { get; private set; }
+        public PlayerRunState RunState { get; private set; }
 
         #endregion
 
@@ -63,6 +64,7 @@ namespace PlayEatRepeat.Player
             InAirState = new PlayerInAirState(this, StateMachine, playerData, "InAir");
             IdleLandState = new PlayerIdleLandState(this, StateMachine, playerData, "Land");
             WalkJumpState = new PlayerWalkJumpState(this, StateMachine, playerData, "IdleJump");
+            RunState = new PlayerRunState(this, StateMachine, playerData, "Run");
         }
 
         private void Start()
@@ -90,10 +92,15 @@ namespace PlayEatRepeat.Player
             Rigidbody2D.velocity = new Vector2(velocityX, Rigidbody2D.velocity.y);
         }
 
+        public void SetVelocityY(float value)
+        {
+            Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, value);
+        }
+
         public void AddForce(Vector2 direction, float jumpForce)
         {
-            Rigidbody2D.AddForce(direction * jumpForce,
-                ForceMode2D.Impulse);
+            Rigidbody2D.AddForce(direction * jumpForce * 100,
+                ForceMode2D.Force);
         }
     }
 }

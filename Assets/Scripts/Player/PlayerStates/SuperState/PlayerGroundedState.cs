@@ -6,8 +6,9 @@ namespace PlayEatRepeat.Player.PlayerStates.SuperState
 {
     public abstract class PlayerGroundedState : PlayerState
     {
-        protected float xAxisInput;
+        protected float xInput;
         protected bool JumpInput;
+        protected bool SprintInput;
 
         protected bool IsGrounded;
 
@@ -18,9 +19,12 @@ namespace PlayEatRepeat.Player.PlayerStates.SuperState
 
         public override void LogicUpdate()
         {
-            xAxisInput = player.InputSystem.Player.Movement.ReadValue<float>();
+            base.LogicUpdate();
+            xInput = player.InputSystem.Player.Movement.ReadValue<float>();
             player.InputSystem.Player.Jump.started += _ => JumpInput = true;
             player.InputSystem.Player.Jump.canceled += _ => JumpInput = false;
+            player.InputSystem.Player.Sprint.started += _ => SprintInput = true;
+            player.InputSystem.Player.Sprint.canceled += _ => SprintInput = false;
             Turn();
         }
 
@@ -32,11 +36,11 @@ namespace PlayEatRepeat.Player.PlayerStates.SuperState
 
         private void Turn()
         {
-            if (xAxisInput > 0)
+            if (xInput > 0)
             {
                 player.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-            else if (xAxisInput < 0)
+            else if (xInput < 0)
             {
                 player.transform.rotation = Quaternion.Euler(0, 180, 0);
             }

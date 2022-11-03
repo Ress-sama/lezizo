@@ -34,7 +34,7 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
             float stateTime = Time.time - startTime;
             CheckAddForceByTime(stateTime);
             CheckAbilityDoneByTime(stateTime);
-            CheckUpdateColliderByTime(stateTime);
+            //CheckUpdateColliderByTime(stateTime);
         }
 
         public override void Exit()
@@ -47,8 +47,8 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
         {
             if (time > addForceTime && !isJump)
             {
-                Debug.Log(xInput);
-                player.AddForce(new Vector2(xInput * 0.3f, 1), playerData.JumpForce);
+                player.SetVelocityY(playerData.JumpForce);
+                player.SetVelocityX(playerData.MoveSpeed*10,xInput,500);
                 isJump = true;
             }
         }
