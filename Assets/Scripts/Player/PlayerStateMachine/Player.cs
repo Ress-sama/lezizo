@@ -7,6 +7,16 @@ namespace PlayEatRepeat.Player
 {
     public class Player : MonoBehaviour
     {
+        public float VelocityX
+        {
+            get => Rigidbody2D.velocity.x;
+        }
+
+        public float VelocityY
+        {
+            get => Rigidbody2D.velocity.y;
+        }
+
         public PlayerStateMachine StateMachine { get; private set; }
         public InputSystem InputSystem { get; private set; }
 
@@ -59,12 +69,12 @@ namespace PlayEatRepeat.Player
             ColliderUpdater = new ColliderUpdater(CapsuleCollider);
             DistanceCalculator = new DistanceCalculator(CapsuleCollider);
             IdleState = new PlayerIdleState(this, StateMachine, playerData, "Idle");
-            WalkState = new PlayerWalkState(this, StateMachine, playerData, "Walk");
+            WalkState = new PlayerWalkState(this, StateMachine, playerData, "Move");
             IdleJumpState = new PlayerIdleJumpState(this, StateMachine, playerData, "IdleJump");
             InAirState = new PlayerInAirState(this, StateMachine, playerData, "InAir");
             IdleLandState = new PlayerIdleLandState(this, StateMachine, playerData, "Land");
             WalkJumpState = new PlayerWalkJumpState(this, StateMachine, playerData, "IdleJump");
-            RunState = new PlayerRunState(this, StateMachine, playerData, "Run");
+            RunState = new PlayerRunState(this, StateMachine, playerData, "Move");
         }
 
         private void Start()
@@ -84,12 +94,9 @@ namespace PlayEatRepeat.Player
             StateMachine.CurrentState.PhysicsUpdate();
         }
 
-        public void SetVelocityX(float moveForce, float direction, float smooth)
+        public void SetVelocityX(float value)
         {
-            float velocityX =
-                Mathf.MoveTowards(Rigidbody2D.velocity.x, moveForce * direction,
-                    smooth * Time.deltaTime);
-            Rigidbody2D.velocity = new Vector2(velocityX, Rigidbody2D.velocity.y);
+            Rigidbody2D.velocity = new Vector2(value, Rigidbody2D.velocity.y);
         }
 
         public void SetVelocityY(float value)

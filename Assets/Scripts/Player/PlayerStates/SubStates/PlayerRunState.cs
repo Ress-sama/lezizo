@@ -1,10 +1,14 @@
 using PlayEatRepeat.Player.Data;
 using PlayEatRepeat.Player.PlayerStates.SuperState;
+using UnityEngine;
 
 namespace PlayEatRepeat.Player.PlayerStates.SubStates
 {
     public class PlayerRunState : PlayerGroundedState
     {
+        private float timeElapsed;
+        private float lerpDuration;
+
         public PlayerRunState(Player player, PlayerStateMachine playerStateMachine, PlayerData playerData,
             string animationBoolName) : base(player, playerStateMachine, playerData, animationBoolName)
         {
@@ -13,6 +17,8 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
         public override void Enter()
         {
             base.Enter();
+            lerpDuration = 0.9f;
+            timeElapsed = 0;
             SprintInput = true;
         }
 
@@ -36,7 +42,10 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-            player.SetVelocityX(playerData.MoveSpeed + playerData.MoveSpeed * 1.5f, xInput, 80);
+            float velocityX =
+                Mathf.MoveTowards(Mathf.Abs(player.VelocityX), playerData.MoveSpeed * 2,
+                    35 * Time.deltaTime);
+            player.SetVelocityX(velocityX * xInput);
         }
     }
 }

@@ -6,9 +6,19 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
 {
     public class PlayerWalkState : PlayerGroundedState
     {
+        private float timeElapsed;
+        private float lerpDuration;
+
         public PlayerWalkState(Player player, PlayerStateMachine playerStateMachine, PlayerData playerData,
             string animationBoolName) : base(player, playerStateMachine, playerData, animationBoolName)
         {
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+            lerpDuration = 0.2f;
+            timeElapsed = 0;
         }
 
         public override void LogicUpdate()
@@ -33,7 +43,18 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-            player.SetVelocityX(playerData.MoveSpeed, xInput, 80);
+            /*float velocityX = playerData.MoveSpeed;
+            if (lerpDuration > timeElapsed)
+            {
+                velocityX = Mathf.Lerp(Mathf.Abs(player.VelocityX), playerData.MoveSpeed, timeElapsed / lerpDuration);
+                timeElapsed += Time.deltaTime;
+            }*/
+
+            float velocityX =
+                Mathf.MoveTowards(Mathf.Abs(player.VelocityX), playerData.MoveSpeed,
+                    35 * Time.deltaTime);
+
+            player.SetVelocityX(velocityX* xInput);
         }
     }
 }

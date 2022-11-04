@@ -48,7 +48,7 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
             if (time > addForceTime && !isJump)
             {
                 player.SetVelocityY(playerData.JumpForce);
-                player.SetVelocityX(playerData.MoveSpeed*10,xInput,500);
+                //player.SetVelocityX(playerData.MoveSpeed*10,xInput,500);
                 isJump = true;
             }
         }

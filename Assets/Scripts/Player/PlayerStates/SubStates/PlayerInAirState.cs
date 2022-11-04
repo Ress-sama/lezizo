@@ -38,7 +38,7 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-            player.SetVelocityX(playerData.MoveSpeed, xInput, 100);
+            //player.SetVelocityX(playerData.MoveSpeed, xInput, 100);
         }
 
         public override void DoChecks()
