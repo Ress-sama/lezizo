@@ -35,7 +35,7 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
             }
             else if (JumpInput)
             {
-                playerStateMachine.ChangeState(player.WalkJumpState);
+                playerStateMachine.ChangeState(player.RunJumpState);
             }
         }
 
@@ -44,7 +44,7 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
             base.PhysicsUpdate();
             float velocityX =
                 Mathf.MoveTowards(Mathf.Abs(player.VelocityX), playerData.MoveSpeed * 2,
-                    35 * Time.deltaTime);
+                    50 * Time.deltaTime);
             player.SetVelocityX(velocityX * xInput);
         }
     }

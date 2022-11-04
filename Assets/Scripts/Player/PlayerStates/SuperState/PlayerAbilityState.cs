@@ -24,9 +24,12 @@ namespace PlayEatRepeat.Player.PlayerStates.SuperState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+
+            isGrounded = player.GroundDetector.CheckGround();
+            xInput = player.InputSystem.Player.Movement.ReadValue<float>();
+
             if (isAbilityDone)
             {
-                
                 Debug.Log(isGrounded);
 
                 if (isGrounded)
@@ -38,13 +41,13 @@ namespace PlayEatRepeat.Player.PlayerStates.SuperState
                     playerStateMachine.ChangeState(player.InAirState);
                 }
             }
+
+            player.Animator.SetFloat("MoveThreshold", Mathf.Abs(player.VelocityX));
         }
 
         public override void DoChecks()
         {
             base.DoChecks();
-            isGrounded = player.GroundDetector.CheckGround();
-            xInput = player.InputSystem.Player.Movement.ReadValue<float>();
         }
     }
 }

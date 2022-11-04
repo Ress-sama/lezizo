@@ -25,8 +25,8 @@ namespace PlayEatRepeat.Player.PlayerStates.SuperState
             player.InputSystem.Player.Jump.canceled += _ => JumpInput = false;
             player.InputSystem.Player.Sprint.started += _ => SprintInput = true;
             player.InputSystem.Player.Sprint.canceled += _ => SprintInput = false;
-            Turn();
             player.Animator.SetFloat("MoveThreshold", Mathf.Abs(player.VelocityX));
+            Turn();
         }
 
         public override void DoChecks()

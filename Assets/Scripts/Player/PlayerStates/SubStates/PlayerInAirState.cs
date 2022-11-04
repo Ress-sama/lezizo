@@ -27,18 +27,22 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
         {
             base.LogicUpdate();
             xInput = player.InputSystem.Player.Movement.ReadValue<float>();
-            
+
             if (isGrounded || groundDistance < 5)
             {
                 playerStateMachine.ChangeState(player.IdleLandState);
             }
+
             Turn();
         }
 
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-            //player.SetVelocityX(playerData.MoveSpeed, xInput, 100);
+            float velocityX =
+                Mathf.MoveTowards(Mathf.Abs(player.VelocityX), playerData.MoveSpeed / 2,
+                    50 * Time.deltaTime);
+            player.SetVelocityX(velocityX * xInput);
         }
 
         public override void DoChecks()

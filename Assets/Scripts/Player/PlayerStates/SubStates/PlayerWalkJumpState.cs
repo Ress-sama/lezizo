@@ -48,7 +48,7 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
             if (time > addForceTime && !isJump)
             {
                 player.SetVelocityY(playerData.JumpForce);
-                //player.SetVelocityX(playerData.MoveSpeed*10,xInput,500);
+                player.SetVelocityX(5 * xInput);
                 isJump = true;
             }
         }
@@ -58,16 +58,6 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
             if (time > abilityDoneTime)
             {
                 isAbilityDone = true;
-            }
-        }
-
-        private void CheckUpdateColliderByTime(float time)
-        {
-            if (time > colliderUpdateTime && !colliderUpdated)
-            {
-                colliderUpdated = true;
-                player.ColliderUpdater.SetParameters(new Vector2(1.72f, 5.14f), new Vector2(0.26f, 3.14f), 15);
-                player.ColliderUpdater.UpdateCollider = true;
             }
         }
     }

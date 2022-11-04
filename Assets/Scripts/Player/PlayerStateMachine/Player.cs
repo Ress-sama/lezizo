@@ -45,6 +45,7 @@ namespace PlayEatRepeat.Player
         public PlayerIdleLandState IdleLandState { get; private set; }
         public PlayerWalkJumpState WalkJumpState { get; private set; }
         public PlayerRunState RunState { get; private set; }
+        public PlayerRunJumpState RunJumpState { get; private set; }
 
         #endregion
 
@@ -75,6 +76,7 @@ namespace PlayEatRepeat.Player
             IdleLandState = new PlayerIdleLandState(this, StateMachine, playerData, "Land");
             WalkJumpState = new PlayerWalkJumpState(this, StateMachine, playerData, "IdleJump");
             RunState = new PlayerRunState(this, StateMachine, playerData, "Move");
+            RunJumpState = new PlayerRunJumpState(this, StateMachine, playerData, "RunJump");
         }
 
         private void Start()
