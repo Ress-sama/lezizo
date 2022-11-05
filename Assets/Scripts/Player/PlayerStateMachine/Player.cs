@@ -101,6 +101,11 @@ namespace PlayEatRepeat.Player
             Rigidbody2D.velocity = new Vector2(value, Rigidbody2D.velocity.y);
         }
 
+        public void AddVelocityX(float value)
+        {
+            Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x + value, Rigidbody2D.velocity.y);
+        }
+
         public void SetVelocityY(float value)
         {
             Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, value);

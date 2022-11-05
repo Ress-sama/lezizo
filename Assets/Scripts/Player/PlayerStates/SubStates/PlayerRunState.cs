@@ -42,10 +42,15 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
+            /*
             float velocityX =
-                Mathf.MoveTowards(Mathf.Abs(player.VelocityX), playerData.MoveSpeed * 2,
-                    50 * Time.deltaTime);
-            player.SetVelocityX(velocityX * xInput);
+                Mathf.Lerp(player.VelocityX, playerData.MoveSpeed * xInput,
+                    35 * Time.deltaTime);
+            player.SetVelocityX(velocityX);
+        */
+            float target = playerData.MoveSpeed * 2f * xInput;
+            float differenceVelocity = target - player.VelocityX;
+            player.AddVelocityX(differenceVelocity * 0.4f);
         }
     }
 }

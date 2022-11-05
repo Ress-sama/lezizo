@@ -50,11 +50,15 @@ namespace PlayEatRepeat.Player.PlayerStates.SubStates
                 timeElapsed += Time.deltaTime;
             }*/
 
-            float velocityX =
-                Mathf.MoveTowards(Mathf.Abs(player.VelocityX), playerData.MoveSpeed,
-                    35 * Time.deltaTime);
+            //current 0
 
-            player.SetVelocityX(velocityX* xInput);
+            //target 6 * xInput
+
+            // difference = target - target 6 * xInput ( 6 )
+
+            float target = playerData.MoveSpeed * xInput;
+            float differenceVelocity = target - player.VelocityX;
+            player.AddVelocityX(differenceVelocity * 0.4f);
         }
     }
 }
